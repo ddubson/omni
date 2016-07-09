@@ -1,5 +1,7 @@
 # Omni toolset
 
+Omni toolset can currently help you add things to your local path.
+
 # Running Omni
 
 Make sure to have Golang 1.6.x installed on your machine, then run:

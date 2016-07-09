@@ -6,9 +6,8 @@ import (
 	"io/ioutil"
 	"os/user"
 	"log"
+	"github.com/ddubson/omni-tool/omnilib"
 )
-
-const bashProfile string = ".bash_profile"
 
 func main() {
 	if len(os.Args) < 2 {
@@ -31,7 +30,7 @@ func main() {
 
 func printLocalBashProfile() {
 	// read the whole file at once
-	file, err := ioutil.ReadFile(getUserHomeDir() + "/" + bashProfile)
+	file, err := ioutil.ReadFile(getUserHomeDir() + "/" + omnilib.BashProfile)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, err.Error())
 	} else {

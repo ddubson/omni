@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"fmt"
+	internal "github.com/ddubson/omni/internal"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"os"
@@ -24,7 +24,7 @@ func NewWhoAmICmd() *cobra.Command {
 				os.Exit(1)
 			}
 			var user = strings.Replace(string(output), "\n", "", -1)
-			fmt.Fprintln(cmd.OutOrStdout(), "⭐️ You are signed in as \""+user+"\"")
+			internal.YellowPrint.Fprintf(cmd.OutOrStdout(), "⭐️ You are signed in as \""+user+"\"")
 		},
 	}
 }

@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-var rootCmd = &cobra.Command{
+var rootCmd = cobra.Command{
 	Use:   "omni",
 	Short: "Omni is a tiny swiss-army knife.",
 	Run: func(cmd *cobra.Command, args []string) {

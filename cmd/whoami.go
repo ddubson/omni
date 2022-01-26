@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"os"
 	"os/exec"
@@ -8,19 +10,21 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(whoAmICmd)
+	rootCmd.AddCommand(NewWhoAmICmd())
 }
 
-var whoAmICmd = &cobra.Command{
-	Use:   "whoami",
-	Short: "Print the user currently logged in.",
-	Run: func(cmd *cobra.Command, args []string) {
-		output, err := exec.Command("whoami").Output()
-		if err != nil {
-			println("⚠️ Unable to fetch who you are 😢")
-			os.Exit(1)
-		}
-		var user = strings.Replace(string(output), "\n", "", -1)
-		println("⭐️ You are signed in as \"" + user + "\"")
-	},
+func NewWhoAmICmd() *cobra.Command {
+	return &cobra.Command{
+		Use:   "whoami",
+		Short: "Print the user currently logged in.",
+		Run: func(cmd *cobra.Command, args []string) {
+			output, err := exec.Command("whoami").Output()
+			if err != nil {
+				log.Error("⚠️ Unable to fetch who you are 😢")
+				os.Exit(1)
+			}
+			var user = strings.Replace(string(output), "\n", "", -1)
+			fmt.Fprintln(cmd.OutOrStdout(), "⭐️ You are signed in as \""+user+"\"")
+		},
+	}
 }
